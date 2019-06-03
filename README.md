@@ -1,0 +1,2 @@
+# eventer
+simple event emitter
