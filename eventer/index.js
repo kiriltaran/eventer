@@ -4,13 +4,18 @@ class Eventer {
   }
 
   on(eventName, cb) {
-    this.callbacks[eventName] = cb;
+    if(!this.callbacks[eventName]) {
+      this.callbacks[eventName] = []
+    }
+    this.callbacks[eventName].push(cb)
   }
 
   emit(eventName) {
-    if (this.callbacks[eventName] && typeof this.callbacks[eventName] === 'function') {
-      this.callbacks[eventName]();
-    }
+    this.callbacks[eventName].forEach(cb => {
+      if (typeof cb === 'function') {
+        cb();
+      }
+    });
   }
 }
 
